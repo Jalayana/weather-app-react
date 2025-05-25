@@ -5,7 +5,7 @@ import "./WeatherSearch.css";
 function App() {
   return (
     <div className="App">
-      <h1>Weather Search Engine</h1>
+      <h3>Weather Search Engine</h3>
       <WeatherSearch defaultCity="New York" />
       <footer>
         This project was coded by {""}

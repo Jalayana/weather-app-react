@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function WeatherSearch() {
-  const [city, setCity] = useState("");
+export default function WeatherSearch(props) {
+  const [city, setCity] = useState(props.defaultCity);
   const [isWeatherReady, setIsWeatherReady] = useState(false);
   const [weather, setWeather] = useState({});
 
@@ -37,13 +37,19 @@ export default function WeatherSearch() {
       description: response.data.weather[0].description,
     });
   }
-
-  function handleSubmit(event) {
-    event.preventDefault();
+  function search() {
     let apiKey = "5aac6d0188c6f17d6d2bbe6591b6fef0";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(displayWeather);
   }
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
+
+  useEffect(() => {
+    search();
+  }, []);
 
   function updateCity(event) {
     setCity(event.target.value);
