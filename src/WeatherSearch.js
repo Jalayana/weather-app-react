@@ -10,6 +10,7 @@ export default function WeatherSearch() {
     setIsWeatherReady(true);
     setWeather({
       temperature: response.data.main.temp,
+      feels_like: response.data.main.feels_like,
       wind: response.data.wind.speed,
       humidity: response.data.main.humidity,
       icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
@@ -19,7 +20,7 @@ export default function WeatherSearch() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    let apiKey = "6d68aadfacdd4f5163bc273049a0cf2d";
+    let apiKey = "b47fdf6445cd8b64ab889be77dbe56d4";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(displayWeather);
   }
@@ -50,7 +51,7 @@ export default function WeatherSearch() {
           <li>Description: {weather.description}</li>
           <li>Humidity: {weather.humidity}%</li>
           <li>Wind: {Math.round(weather.wind)}km/h</li>
-          <li>Feels like{Math.round(weather.feels_like)}°C</li>
+          <li>Feels like: {Math.round(weather.feels_like)}°C</li>
           <li>
             <img src={weather.icon} alt={weather.description} />
           </li>
